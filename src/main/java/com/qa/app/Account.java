@@ -1,14 +1,22 @@
 package com.qa.app;
 
-import java.util.HashMap;
-import java.util.Map;
+
 
 public class Account 
 {
 	private String firstName;
 	private String secName;
-	private int accNum = 0 ;
-	private int nextAccNum = 1;
+	private static int accNum =0;
+	private int nextAccNum ;
+	public Account(String fName,String sName)
+	{
+		
+		//
+		setFirstName(fName);
+		setSecondName(sName);
+		//System.out.println("First Name : " +getFirstName()+"\nSecond Name : "+getSecondName()+"\nAccount Number : "+getAccNum());
+		accNum =0;
+	}
 	
 	public void setFirstName(String nfNme)
 	{
@@ -20,21 +28,13 @@ public class Account
 	}
 	public void setAccNum()
 	{
-		if (accNum<nextAccNum)
-		{
+		
 			//accNum = nextAccNum;
-			//nextAccNum ++;		
-		}
+			//nextAccNum ++;	
+
+			
 	}
-	public Account(String fName,String sName)
-	{
-		
-		//setAccNum();
-		setFirstName(fName);
-		setSecondName(sName);
-		//System.out.println("First Name : " +getFirstName()+"\nSecond Name : "+getSecondName()+"\nAccount Number : "+getAccNum());
-		
-	}
+	
 	
 	
 	
@@ -48,7 +48,9 @@ public class Account
 	}
 	public int getAccNum()
 	{
-		accNum=accNum +1;
+		
+		//accNum= accNum-2;
+		accNum++;
 		return accNum;
 	}
 }
