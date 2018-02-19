@@ -20,27 +20,21 @@ public class InspectMap {
 		Services myService = new Services();
 		Account newAcc= new Account("Declan","Horlick");
 		HashMap currentMap = myService.addAccount();
+		System.out.println(currentMap);
 		Iterator it = currentMap.entrySet().iterator();
 		
 		while(it.hasNext())
 		{
 			Map.Entry pair = (Map.Entry)it.next();
-			//System.out.println(pair.toString());
-			//pair.toString()
-			//it.remove(); // avoids a ConcurrentModificationException
-			//System.out.println(pair.getValue());
+			
 			if(newAcc.toString().equals("Declan"))
 			{
 			
 				count ++;
 			}
-			//if (pair.getValue().equals("Declan"))
-			//{
-			//	count ++;
-			//}
 			
 		}
-		System.out.println(count);
+		
 		return count;
 		
 	}
