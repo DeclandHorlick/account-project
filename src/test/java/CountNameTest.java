@@ -4,6 +4,8 @@ import org.junit.Test;
 
 import com.qa.app.InspectMap;
 
+import junit.framework.Assert;
+
 public class CountNameTest {
 	private InspectMap inspectMap;
 	
@@ -11,11 +13,14 @@ public class CountNameTest {
 	public void test() 
 	{
 		inspectMap = new InspectMap();
-		if(inspectMap.getCommonNames() = 2)
+		if(inspectMap.getCommonNames() == 2)
 		{
 			
 		}
-		fail("Not yet implemented");
+		//System.out.println(inspectMap.getCommonNames());
+		Assert.assertEquals("Failure the returned count isnt right",2,inspectMap.getCommonNames());
+		System.out.println("There are 2 Declan's entered into your map");
+		
 	}
 
 }

@@ -8,6 +8,8 @@ public class Account
 	private String secName;
 	private static int accNum =0;
 	private int nextAccNum ;
+	
+	
 	public Account(String fName,String sName)
 	{
 		
@@ -52,5 +54,9 @@ public class Account
 		//accNum= accNum-2;
 		accNum++;
 		return accNum;
+	}
+	public String toString()
+	{
+		return firstName;
 	}
 }

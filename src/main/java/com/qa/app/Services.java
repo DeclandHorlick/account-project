@@ -25,7 +25,7 @@ public class Services
 		accountMap.put(newAcc.getAccNum(), newAcc);//new Account("Jimmy", "Newtron") );
 		accountMap.put(newAcc2.getAccNum() , newAcc2);//new Account("Jimmy", "Newtron") );
 		JSONObject gson = new JSONObject(accountMap);	
-		System.out.println(gson);
+		//System.out.println(gson);
 		//ObjectMapper mapper = new ObjectMapper();
 		//String jsonFromMap = mapper.writeValueAsString(accountMap);
 		return accountMap;
