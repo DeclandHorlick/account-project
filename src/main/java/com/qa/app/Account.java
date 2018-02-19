@@ -15,7 +15,7 @@ public class Account
 		setFirstName(fName);
 		setSecondName(sName);
 		//System.out.println("First Name : " +getFirstName()+"\nSecond Name : "+getSecondName()+"\nAccount Number : "+getAccNum());
-		accNum =0;
+		accNum = accNum - 1;
 	}
 	
 	public void setFirstName(String nfNme)
