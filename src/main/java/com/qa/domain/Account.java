@@ -5,9 +5,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
-@Entity
+@Entity @Table(name = "Account")
 public class Account {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 	
 	@Column
 	private String firstName;
@@ -15,11 +20,13 @@ public class Account {
 	@Column
 	private String secondName;
 	
-	@Id
 	@Column
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String accountNumber;
 
+	public Account()
+	{
+		
+	}
 	public Account(String firstName, String secondName, String accountNumber) {
 		this.firstName = firstName;
 		this.secondName = secondName;

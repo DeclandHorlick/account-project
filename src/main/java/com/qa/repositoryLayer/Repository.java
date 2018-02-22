@@ -6,12 +6,15 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.transaction.Transactional;
-import javax.transaction.Transactional.TxType;
+
+
+import static javax.transaction.Transactional.TxType.REQUIRED;
+import static javax.transaction.Transactional.TxType.SUPPORTS;
 
 import com.qa.domain.Account;
 import com.qa.util.JSONUtil;
 
-@Transactional(TxType.SUPPORTS)
+@Transactional(SUPPORTS)
 public class Repository {
 	
 	    @PersistenceContext(unitName = "primary")
@@ -20,38 +23,61 @@ public class Repository {
 	    @Inject
 	    private JSONUtil util;
 
-	    public String getAccount(Long id) 
+	    public String getAllAccounts() 
 	    {
 	    	Query query = em.createQuery("Select a FROM Account a");
 	    	Collection<Account> accounts = (Collection<Account>) query.getResultList();
 	    	
 	    	return util.getJSONForObject(accounts);
-	    	
-	       // return em.find(Account.class, id);
+	    }
+	    
+	    
+	    public String findAccount(Long id) 
+	    {
+	    	String myAc= util.getJSONForObject(em.find(Account.class, id));
+	    	return myAc;
 	    }
 
-	    @Transactional(TxType.REQUIRED)
-	    public String createAccount(String newAcc) 
-	    {
-	        Account anAccount = util.getObjectForJSON(accounts,Account.class);
-	    	em.persist(newAcc);
-	        return newAcc;
-	    }
+	    @Transactional(REQUIRED)
+		public String createAccount(String accout) {
+			Account anAccount = util.getObjectForJSON(accout, Account.class);
+			em.persist(anAccount);
+			return "{\"message\": \"account has been sucessfully added\"}";
+		}
 	    
-	    @Transactional(TxType.REQUIRED)
-	    public void deleteAccount(Long id) 
+	    @Transactional(REQUIRED)
+		public String deleteAccount(Long id) {
+			Account accountInDB = util.getObjectForJSON(findAccount(id), null);
+			if (accountInDB != null) {
+				em.remove(accountInDB);
+			}
+			return "{\"message\": \"account sucessfully deleted\"}";
+		}
+	 
+		@Transactional(REQUIRED)
+		public String updateAccount(Long id)//, String accountToUpdate) 
 	    {
-	        em.remove(em.find(Account.class,id));
-	        
-	    }
+			//Account updatedAccount = util.getObjectForJSON(accountToUpdate, Account.class);
+			//String updateAccount = util.getJSONForObject(updatedAccount);
+			String accountFromDB = findAccount(id);
+			//if (accountToUpdate != null) {
+			//accountFromDB = updateAccount;
+				
+			     em.createQuery("update Account set firstName = \'king' where id=1")
+			     .executeUpdate();
+				
+			//}
+			return "{\"message\": \"account sucessfully updated\"}";
+		}
 	    
-	    @Transactional(TxType.REQUIRED)
-	    public void updateAccount(Long id,String newName) 
-	    {
-	    	Account repo = em.find(Account.class,id);
-	        repo.setFirstName(newName);
-	        System.out.println(repo.getFirstName());
-	    }
+	    public void setManager(EntityManager manager) {
+			this.em = manager;
+		}
+
+		public void setUtil(JSONUtil util) {
+			this.util = util;
+		}
+
 	
 
 
